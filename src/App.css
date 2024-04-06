@@ -1,0 +1,21 @@
+
+
+* {
+  margin: 0;
+
+  padding: 0;
+}
+
+/* *: Universal selector targeting all elements on the page.
+
+margin: 0;: Sets the margin of all elements to 0. This removes any default margins that browsers apply to certain elements.
+
+box-sizing: border-box;: This property makes sure that padding and border are included in the element's total width and height. This prevents unexpected layout issues.
+
+padding: 0;: Sets the padding of all elements to 0, removing any default padding that browsers might apply. */
+
+
+.nav {
+    width: 100vw;
+    background-color: cadetblue;
+}
