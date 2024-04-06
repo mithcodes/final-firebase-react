@@ -34,23 +34,19 @@ function App() {
   }, []);
 
   return (
-    <div className="container">
       
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/book/list" element={<ListingPage />} />
-            <Route path="/github" element={<Github />} /> 
-          
-        
-        
-           
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/book/list" element={<ListingPage />} />
-        </Routes>
+      <div className="container">
+            <Nav /> {/* Include Nav component here */}
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/book/list" element={<ListingPage />} />
+                <Route path="/github" element={<Github />} />
+            </Routes>
+        </div>
       
-    </div>
+    
   );
 }
 
