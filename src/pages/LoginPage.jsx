@@ -26,7 +26,11 @@ navigate("/")
   };
 
   return (
-    <div className="container">
+    <div className="logincontainer">
+      <div className="divtop d-flex justify-content-center align-items-center">
+    <h4>Update your daily Expenses with us! Login now</h4>
+</div>
+    <div className="container m-5">
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
@@ -52,9 +56,10 @@ navigate("/")
         </div>
         <button type="submit" className="btn btn-primary">Login</button>
         <p>Do not have an account? <Link to="/register">Signup</Link></p>
-        <h3 className='m-5'>or sign with google</h3>
+        <h6 className='m-2'>or sign with google</h6>
         <button type="submit" className="btn btn-primary m-1" onClick={firebase.signWithGoogle}>sign with google</button>
       </form>
+    </div>
     </div>
   );
 };

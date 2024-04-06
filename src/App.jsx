@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
@@ -34,21 +32,23 @@ function App() {
   }, []);
 
   return (
-      
-      <div className="container">
-            <Nav /> {/* Include Nav component here */}
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/register" element={<RegisterPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/book/list" element={<ListingPage />} />
-                <Route path="/github" element={<Github />} />
-            </Routes>
-        </div>
-      
-    
+    <div className="container">
+      <div>
+        {user && <Nav />} {/* Render Nav component only if user is logged in */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/book/list" element={<ListingPage />} />
+          <Route path="/github" element={<Github />} />
+          {user && <Route path="/register" element={<RegisterPage />} />}
+          {user && <Route path="/login" element={<LoginPage />} />}
+        </Routes>
+      </div>
+      <Routes>
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+      </Routes>
+    </div>
   );
 }
 
 export default App;
-

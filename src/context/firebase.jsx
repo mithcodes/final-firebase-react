@@ -9,6 +9,8 @@ import {
     collection,
     addDoc,
     getDocs,
+    deleteDoc,
+    doc 
   } from "firebase/firestore";
   import { getStorage, ref } from 'firebase/storage';
 
@@ -61,21 +63,38 @@ const signUserWithEmailAndPass=(email,password)=>{
 const signWithGoogle=()=> signInWithPopup(firebaseAuth,googleProvider)
 const logout = () => firebaseAuth.signOut();
 
-const handleCreateNewListing = async (price ,description,category) => {
-    
-
-    await addDoc(collection(firestore, 'books/'), {
+const handleCreateNewListing = async (price, description, category) => {
+  const userEmail = firebaseAuth.currentUser.email;
+  await addDoc(collection(firestore, 'books/'), {
       price,
       description,
       category,
-    
-    });
-    console.log('created successfully')
-  };
+      userEmail,
+  });
+  console.log('created successfully');
+};
+
    
-  const listAllBooks=()=>{
-    return getDocs(collection(firestore,"books"))
+
+const deleteBook = async (id) => {
+  try {
+      await deleteDoc(doc(firestore, `books/${id}`));
+      console.log('deleted successfully');
+  } catch (error) {
+      console.error("Error deleting book:", error);
   }
+};
+
+const listAllBooks = async () => {
+  const userEmail = firebaseAuth.currentUser.email;
+  const booksSnapshot = await getDocs(collection(firestore, "books"));
+  const booksData = booksSnapshot.docs
+      .filter(doc => doc.data().userEmail === userEmail)
+      .map(doc => ({ id: doc.id, ...doc.data() })); // Include the document ID in the returned data
+  return booksData;
+};
+// ... (No changes here)
+
 
 
 
@@ -86,7 +105,7 @@ const isLoggedIn=user?true:false;
     return(
         <FirebaseContext.Provider
         
-        value={{signupUserWithEmailAndPassword,signUserWithEmailAndPass,signWithGoogle,isLoggedIn, handleCreateNewListing,listAllBooks,logout}}
+        value={{signupUserWithEmailAndPassword,signUserWithEmailAndPass,signWithGoogle,isLoggedIn, handleCreateNewListing,listAllBooks,logout, deleteBook}}
         >
             {props.children}
         </FirebaseContext.Provider>

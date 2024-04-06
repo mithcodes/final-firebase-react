@@ -27,7 +27,7 @@ const Nav = () => {
             <div className="d-flex justify-content-center mr-5  pr-4">
                 <ul className="nav nav-pills">
                     <li className="nav-item">
-                        <NavLink to="/" className="nav-link" activeClassName="active" exact>
+                        <NavLink to="/" className="nav-link"  exact>
                             Home
                         </NavLink>
                     </li>
@@ -45,11 +45,13 @@ const Nav = () => {
             </div>
             </div>
             <div className="app d-flex justify-content-between m-2">
-                <h4>welcome to expenses tracker </h4>
+                <div className="pg">
+                <h6>welcome to expenses tracker </h6>
                 <p>
                     {/* your profile is incomplete <Link to="/github">complete your profile</Link> */}
                     your profile is incomplete <Link to="/github">complete your profile</Link>
                 </p>
+                </div>
             </div>
         </div>
     );

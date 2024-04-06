@@ -31,7 +31,7 @@ const ListingPage = () => {
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">describe your product</label>
           <input 
-            type="number" 
+            type="text" 
             className="form-control" 
             id="exampleInputPassword1" 
             onChange={(e) => setDescription(e.target.value)}
@@ -40,13 +40,16 @@ const ListingPage = () => {
         </div>
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">Enter Price</label>
-          <input 
-            type="number" 
-            className="form-control" 
-            id="exampleInputPassword1" 
-            onChange={(e) => setCategory(e.target.value)}
-            value={category}
-          />
+          <select 
+                        className="form-select" 
+                        id="categorySelect" 
+                        onChange={(e) => setCategory(e.target.value)}
+                        value={category}
+                    >
+                        <option value="Food">Food</option>
+                        <option value="Petrol">Petrol</option>
+                        <option value="Salary">Shopping</option>
+                    </select>
         </div>
         <button className='btn btn-success'>create</button>
       </form>

@@ -19,3 +19,9 @@ padding: 0;: Sets the padding of all elements to 0, removing any default padding
     width: 100vw;
     background-color: cadetblue;
 }
+
+.divtop{
+  width:100vw;
+  height:100px;
+  background-color: blue;
+}

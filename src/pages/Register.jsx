@@ -26,8 +26,12 @@ navigate("/")
   };
 
   return (
+    
     <div className="container">
-      <form onSubmit={handleSubmit}>
+      <div className="divtop d-flex justify-content-center align-items-center">
+    <h4>Update your daily Expenses with us! Login now</h4>
+</div>
+      <form onSubmit={handleSubmit} className='m-5'>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
           <input 
