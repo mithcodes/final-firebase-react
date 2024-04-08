@@ -28,7 +28,7 @@ navigate("/")
   return (
     
     <div className="container">
-      <div className="divtop d-flex justify-content-center align-items-center">
+      <div className="divtop d-flex justify-content-center align-items-center" style={{width:'100vw'}}>
     <h4>Update your daily Expenses with us! Login now</h4>
 </div>
       <form onSubmit={handleSubmit} className='m-5'>
