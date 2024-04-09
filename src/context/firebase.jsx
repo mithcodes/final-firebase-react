@@ -12,9 +12,9 @@ import {
     deleteDoc,
     doc 
   } from "firebase/firestore";
-  import { getStorage, ref } from 'firebase/storage';
+  import { getStorage } from 'firebase/storage';
 
-const FirebaseContext=createContext(null)
+export const FirebaseContext=createContext(null);
 
 
 
@@ -61,7 +61,7 @@ const signUserWithEmailAndPass=(email,password)=>{
 
 
 const signWithGoogle=()=> signInWithPopup(firebaseAuth,googleProvider)
-const logout = () => firebaseAuth.signOut();
+const logout = () =>( firebaseAuth.signOut());
 
 const handleCreateNewListing = async (price, description, category) => {
   const userEmail = firebaseAuth.currentUser.email;
@@ -98,14 +98,15 @@ const listAllBooks = async () => {
 
 
 
-
+const [login, setLogin] = useState(false);
 
 const isLoggedIn=user?true:false;
+
 
     return(
         <FirebaseContext.Provider
         
-        value={{signupUserWithEmailAndPassword,signUserWithEmailAndPass,signWithGoogle,isLoggedIn, handleCreateNewListing,listAllBooks,logout, deleteBook}}
+        value={{login,setLogin,signupUserWithEmailAndPassword,signUserWithEmailAndPass,signWithGoogle,isLoggedIn, handleCreateNewListing,listAllBooks,logout, deleteBook}}
         >
             {props.children}
         </FirebaseContext.Provider>

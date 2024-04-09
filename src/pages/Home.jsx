@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import BookCard from '../context/Card';
-import { useFirebase } from '../context/firebase';
+import BookCard from "../context/BookCard";
+// import { useFirebase } from '../context/firebase';
+import Navbar from '../components/Navbar';
+import Nav from '../components/Navbar';
+
+
+import { useContext } from "react";
+import {FirebaseContext,useFirebase} from "../context/firebase"
 
 const Home = () => {
     const firebase = useFirebase();
     const [books, setBooks] = useState([]);
+    const {login} = useContext(FirebaseContext);
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -29,16 +36,51 @@ const Home = () => {
         console.log("Edit button clicked for book:", id);
     };
 
+ 
+
     return (
         <div className="home-container">
-            {books.map((book, index) => (
-                <BookCard 
-                    key={index}
-                    {...book}
-                    onRemove={() => handleRemoveBook(book.id)}  // Pass the handleRemoveBook function as a prop
-                    onEdit={() => handleEditBook(book.id)}  // Pass the handleEditBook function as a prop
-                />
-            ))}
+
+            {
+                        
+
+                            login ? <ul>
+                            {
+            
+            
+                                books.map((book, index) => {
+                                    return <BookCard
+                                        key={console.log(index)}
+                                        {...book}
+                                        onRemove={() => handleRemoveBook(book.id)}  // Pass the handleRemoveBook function as a prop
+                                        onEdit={() => handleEditBook(book.id)}  // Pass the handleEditBook function as a prop
+                                    />
+            
+                                })
+            
+                            }
+                        </ul>  : <Nav/>
+                                    
+            }
+
+
+  
+
+
+            
+            
+
+            
+
+
+
+
+
+
+
+
+
+
         </div>
     );
 };

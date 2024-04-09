@@ -15,7 +15,10 @@ const Nav = () => {
 
     const handleLogout = async () => {
         await logout();
+
         navigate('/login'); // Redirect to login page after logout
+
+        // if()
     };
     const handleCompleteProfile = () => {
         navigate('/github');

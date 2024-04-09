@@ -20,14 +20,17 @@ navigate("/")
     try {
       await firebase.signupUserWithEmailAndPassword(email, password);
       console.log("successful");
+      alert("✔ Ragistered successfully")
     } catch (error) {
       console.error("Error signing up:", error);
     }
+
+
   };
 
   return (
     
-    <div className="container">
+    <div>
       <div className="divtop d-flex justify-content-center align-items-center" style={{width:'100vw'}}>
     <h4>Update your daily Expenses with us! Login now</h4>
 </div>

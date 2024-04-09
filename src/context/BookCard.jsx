@@ -1,6 +1,12 @@
-import React from "react";
+// import React from "react";
 
-const BookCard = ({ id, price, description, category, onRemove, onEdit }) => {
+
+const BookCard = (data, onRemove, onEdit) => {
+
+
+    const { id, price, description, category } = data;
+
+    console.log(id);
 
     const handleRemoveProduct = async () => {
         try {

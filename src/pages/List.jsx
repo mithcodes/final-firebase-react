@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
-import { useFirebase } from '../context/firebase';
+import React, { useContext, useState } from 'react';
+import { FirebaseContext, useFirebase } from '../context/firebase';
+
+import Navbar from '../components/Navbar'
+
 
 const ListingPage = () => {
   const firebase = useFirebase();
@@ -7,15 +10,23 @@ const ListingPage = () => {
   const [price, setPrice] = useState('');
   const [description,setDescription] = useState('');
   const [category,setCategory] = useState('');
+
+  const {login} = useContext(FirebaseContext);
   
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await firebase.handleCreateNewListing(price,description,category);
+
+    alert("✔ successfully Added")
   };
 
   return (
-    <div className="container">
+    <div className="">
+    {
+
+      login ? console.log() : <Navbar/>
+    }
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">Price of product</label>

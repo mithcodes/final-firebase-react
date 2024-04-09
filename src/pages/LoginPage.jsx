@@ -20,6 +20,7 @@ navigate("/")
     try {
       await firebase.signUserWithEmailAndPass(email, password);
       console.log("successful");
+      alert("✔ Login successfully")
     } catch (error) {
       console.error("Error logging in:", error);
     }
@@ -28,7 +29,7 @@ navigate("/")
   return (
     <div className="logincontainer">
       <div className="divtop d-flex justify-content-center align-items-center">
-    <h4>Update your daily Expenses with us! Login now</h4>
+    <h4 className='text-white'>Update your daily Expenses with us! Login now</h4>
 </div>
     <div className="container m-5">
       <form onSubmit={handleSubmit}>
