@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FirebaseContext, useFirebase } from '../context/firebase';
 
 import Navbar from '../components/Navbar'
@@ -7,9 +7,22 @@ import Navbar from '../components/Navbar'
 const ListingPage = () => {
   const firebase = useFirebase();
 
-  const [price, setPrice] = useState('');
-  const [description,setDescription] = useState('');
-  const [category,setCategory] = useState('');
+
+
+
+  const {inputs, setInputs ,price, setPrice,description,setDescription,category, setCategory} = useContext(FirebaseContext);
+
+  useEffect(()=>{
+setInputs({
+
+  price : price,
+  description : description,
+  category: category
+
+})
+  },[setPrice,setDescription,setCategory])
+
+  // setInputs()
 
   const {login} = useContext(FirebaseContext);
   
@@ -33,7 +46,7 @@ const ListingPage = () => {
           <input 
             type="number" 
             className="form-control" 
-            id="exampleInputEmail1" 
+            id="price" 
             aria-describedby="emailHelp"
             onChange={(e) => setPrice(e.target.value)}
             value={price}
@@ -44,7 +57,7 @@ const ListingPage = () => {
           <input 
             type="text" 
             className="form-control" 
-            id="exampleInputPassword1" 
+            id="description" 
             onChange={(e) => setDescription(e.target.value)}
             value={description}
           />
@@ -53,7 +66,7 @@ const ListingPage = () => {
           <label htmlFor="exampleInputPassword1" className="form-label">Enter Price</label>
           <select 
                         className="form-select" 
-                        id="categorySelect" 
+                        id="Category" 
                         onChange={(e) => setCategory(e.target.value)}
                         value={category}
                     >

@@ -1,23 +1,86 @@
 // import React from "react";
+import { useContext } from "react";
+import firebase from "firebase/compat/app";
+import { FirebaseContext } from "./firebase";
 
 
-const BookCard = (data, onRemove, onEdit) => {
+const BookCard = (data, ) => {
 
 
     const { id, price, description, category } = data;
+    const {editBook, setBooks ,deleteBook, inputs} = useContext(FirebaseContext);
+    // console.log(onEdit);
 
     console.log(id);
 
-    const handleRemoveProduct = async () => {
-        try {
-            await onRemove(id); // Call the onRemove callback to update the local state
-        } catch (error) {
-            console.error("Error deleting book:", error);
-        }
+
+    const handleRemoveBook = async (bookId) => {
+      await deleteBook(bookId);
+           await setBooks(prevBooks => prevBooks.filter(book => book.id !== bookId)); // Remove the deleted book from the state
+        
+       
+  
     };
 
-    const handleEditButton = () => {
-        onEdit(id); // Call the onEdit callback to handle edit functionality
+
+    const {  setPrice,setDescription, setCategory} = useContext(FirebaseContext);
+
+    const handleEditBook = async (data) => {
+
+
+       
+
+       await setPrice(data.price);
+       await  setDescription(data.description);
+       await setCategory(data.category);
+
+
+       await setBooks(prevBooks => prevBooks.filter(book => book.id !== data.id)); 
+
+
+
+
+
+
+
+        // await setBooks(prevBooks => prevBooks.filter(book => book.id !== bookId));
+
+        // const { price, description,category, } = useContext(FirebaseContext);
+
+
+
+      const obj =  {
+
+            price : price,
+            description : description,
+            category : category
+        }
+        console.log(obj);
+
+      
+
+
+//   console.log(document.getElementById("price"));
+
+
+
+
+
+       
+
+      
+
+
+
+
+
+
+       await editBook(data.id,obj);
+
+
+
+
+
     };
     
     return (
@@ -34,12 +97,12 @@ const BookCard = (data, onRemove, onEdit) => {
                         Category: {category}
                     </div>
                     <div className="col">
-                        <button type="button" className="btn btn-danger" onClick={handleRemoveProduct}>
+                        <button type="button" className="btn btn-danger" onClick={()=>handleRemoveBook(id)}>
                             Remove
                         </button>
                     </div>
                     <div className="col">
-                        <button type="button" className="btn btn-primary" onClick={handleEditButton}>
+                        <button type="button" className="btn btn-primary" onClick={()=>handleEditBook(data)}>
                             Edit
                         </button>
                     </div>

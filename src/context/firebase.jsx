@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { createContext,useState ,useEffect} from "react";
 
 import { initializeApp } from "firebase/app";
+import {  updateDoc } from "firebase/firestore";
 
 import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup, onAuthStateChanged,signOut} from "firebase/auth"
 import {
@@ -85,6 +86,25 @@ const deleteBook = async (id) => {
   }
 };
 
+
+const editBook = async (id, newData) => {
+    try {
+
+        // const updateDoc = (bookRef, newData)=>{
+        //     bookRef = newData;
+        // }
+      // Construct a reference to the document in Firestore
+      const bookRef = doc(firestore, `books/${id}`);
+      
+      // Use update function to update the document with new data
+      await updateDoc(bookRef, newData);
+      
+      console.log('Book updated successfully');
+    } catch (error) {
+      console.error("Error editing book:", error);
+    }
+  };
+
 const listAllBooks = async () => {
   const userEmail = firebaseAuth.currentUser.email;
   const booksSnapshot = await getDocs(collection(firestore, "books"));
@@ -99,6 +119,14 @@ const listAllBooks = async () => {
 
 
 const [login, setLogin] = useState(false);
+const [books, setBooks] = useState([]);
+const [inputs, setInputs] = useState({});
+
+
+const [price, setPrice] = useState('');
+const [description,setDescription] = useState('');
+const [category,setCategory] = useState('');
+
 
 const isLoggedIn=user?true:false;
 
@@ -106,7 +134,10 @@ const isLoggedIn=user?true:false;
     return(
         <FirebaseContext.Provider
         
-        value={{login,setLogin,signupUserWithEmailAndPassword,signUserWithEmailAndPass,signWithGoogle,isLoggedIn, handleCreateNewListing,listAllBooks,logout, deleteBook}}
+        value={{
+            price, setPrice,description,setDescription,category,setCategory,
+            
+            inputs, editBook, setInputs,login,setLogin,signupUserWithEmailAndPassword,signUserWithEmailAndPass,signWithGoogle,isLoggedIn, handleCreateNewListing,listAllBooks,logout, deleteBook,books, setBooks}}
         >
             {props.children}
         </FirebaseContext.Provider>

@@ -10,8 +10,7 @@ import {FirebaseContext,useFirebase} from "../context/firebase"
 
 const Home = () => {
     const firebase = useFirebase();
-    const [books, setBooks] = useState([]);
-    const {login} = useContext(FirebaseContext);
+    const {login,books, setBooks} = useContext(FirebaseContext);
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -20,21 +19,9 @@ const Home = () => {
         };
 
         fetchBooks();
-    }, [firebase]);
+    }, [setBooks]);
 
-    const handleRemoveBook = async (bookId) => {
-        try {
-            await firebase.deleteBook(bookId);
-            setBooks(prevBooks => prevBooks.filter(book => book.id !== bookId)); // Remove the deleted book from the state
-        } catch (error) {
-            console.error("Error deleting book:", error);
-        }
-    };
-
-    const handleEditBook = (id) => {
-        // Add your edit functionality here
-        console.log("Edit button clicked for book:", id);
-    };
+    
 
  
 
@@ -52,8 +39,9 @@ const Home = () => {
                                     return <BookCard
                                         key={console.log(index)}
                                         {...book}
-                                        onRemove={() => handleRemoveBook(book.id)}  // Pass the handleRemoveBook function as a prop
-                                        onEdit={() => handleEditBook(book.id)}  // Pass the handleEditBook function as a prop
+                                        dataa = {book}
+                                        // onRemove={() => handleRemoveBook(book.id)}  // Pass the handleRemoveBook function as a prop
+                                        // onEdit={()=>handleEditBook(book.id)}  // Pass the handleEditBook function as a prop
                                     />
             
                                 })
