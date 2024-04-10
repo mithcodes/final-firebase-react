@@ -10,7 +10,8 @@ import {
     addDoc,
     getDocs,
     deleteDoc,
-    doc 
+    doc ,
+    setDoc ,
   } from "firebase/firestore";
   import { getStorage } from 'firebase/storage';
 
@@ -95,6 +96,20 @@ const listAllBooks = async () => {
 };
 // ... (No changes here)
 
+const updateBook = async (id, price, description, category) => {
+    try {
+        const bookRef = doc(firestore, `books/${id}`);
+        await setDoc(bookRef, {
+            price,
+            description,
+            category,
+        }, { merge: true });
+        console.log('updated successfully');
+    } catch (error) {
+        console.error("Error updating book:", error);
+    }
+};
+
 
 
 
@@ -106,7 +121,7 @@ const isLoggedIn=user?true:false;
     return(
         <FirebaseContext.Provider
         
-        value={{login,setLogin,signupUserWithEmailAndPassword,signUserWithEmailAndPass,signWithGoogle,isLoggedIn, handleCreateNewListing,listAllBooks,logout, deleteBook}}
+        value={{login,setLogin,signupUserWithEmailAndPassword,signUserWithEmailAndPass,signWithGoogle,isLoggedIn, handleCreateNewListing,listAllBooks,logout, deleteBook,updateBook,}}
         >
             {props.children}
         </FirebaseContext.Provider>

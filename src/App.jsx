@@ -44,7 +44,7 @@ function App() {
       <div>
         {user && <Nav />} 
         <Routes>
-        {/* <Route path="/" element={<LogoutNavBar />} /> */}
+        
 
           <Route path="/" element={<Home />} />
           <Route path="/book/list" element={<ListingPage />} />

@@ -20,7 +20,7 @@ navigate("/")
     try {
       await firebase.signupUserWithEmailAndPassword(email, password);
       console.log("successful");
-      alert("✔ Ragistered successfully")
+      
     } catch (error) {
       console.error("Error signing up:", error);
     }

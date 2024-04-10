@@ -25,7 +25,7 @@ const Nav = () => {
     };
 
     return (
-        <div className="nav ">
+        <div className="nav pt-5 ">
         <div className="container-fluid">
             <div className="d-flex justify-content-center mr-5  pr-4">
                 <ul className="nav nav-pills">
@@ -45,16 +45,16 @@ const Nav = () => {
                         </button>
                     </li>
                 </ul>
-            </div>
-            </div>
-            <div className="app d-flex justify-content-between m-2">
+                <div className="app d-flex justify-content-between m-2" >
                 <div className="pg">
-                <h6>welcome to expenses tracker </h6>
+                
                 <p>
                     {/* your profile is incomplete <Link to="/github">complete your profile</Link> */}
                     your profile is incomplete <Link to="/github">complete your profile</Link>
                 </p>
                 </div>
+            </div>
+            </div>
             </div>
         </div>
     );
